@@ -18,7 +18,7 @@ module Rack
       @allow_overwrite = opts[:overwrite].nil? ? true : opts[:overwrite]
       @cookie_path = opts[:path] || nil
       @extras = opts[:extra_params] || []
-      @call_back = opts[:call_back] || NullCallBack.new
+      @call_back = opts[:call_back] || NullCallBack
     end
 
     def call(env)
@@ -90,8 +90,8 @@ module Rack
         cookie_hash[:path] = @cookie_path if @cookie_path
         Rack::Utils.set_cookie_header!(headers, key, cookie_hash)
       end
-
-      @call_back.cookie_baked data_hash, request_url
+      byebug
+      @call_back.new.cookie_baked data_hash, request_url
     end
   end
 
