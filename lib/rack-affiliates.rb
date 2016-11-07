@@ -90,7 +90,6 @@ module Rack
         cookie_hash[:path] = @cookie_path if @cookie_path
         Rack::Utils.set_cookie_header!(headers, key, cookie_hash)
       end
-      byebug
       @call_back.new.cookie_baked data_hash, request_url
     end
   end
